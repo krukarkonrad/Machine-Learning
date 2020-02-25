@@ -3,25 +3,23 @@ import pandas as pd
 
 patients = datasets.load_diabetes()
 
-#print(patients['DESCR'])
-#print(patients['data'].shape)
-#print(patients['target'].shape)
+print(patients['DESCR'])
+print(patients['data'].shape)
+print(patients['target'].shape)
 
 patiens_p = pd.DataFrame(patients.data, columns=[patients.feature_names])
 patiens_p.head()
 
-#print("First patient in database")
-#print(patients['data'][0,:])
-
-#print(patients['target'][1])
-
-#print(patiens_p.describe())
+print("First patient in database")
+print(patients['data'][0,:])
+print(patients['target'][1])
+print(patiens_p.describe())
 
 import matplotlib.pyplot as plt
 import seaborn as sb
 
-#sb.pairplot(patiens_p, diag_kind="kde")
-#plt.show()
+sb.pairplot(patiens_p, diag_kind="kde")
+plt.show()
 
 #expamle of data standardisation
 #from sklearn.preprocessing import StandardScaler
@@ -40,5 +38,19 @@ linear_regression.fit(patients_train_data, patients_train_target)
 
 id = 1
 linear_regression_prediction = linear_regression.predict(patients_test_data[id,:].reshape(1,-1))
+
 print(linear_regression_prediction)
 print(linear_regression.coef_)
+
+linear_regression_predictions = linear_regression.predict(patients_test_data)
+print(linear_regression_predictions)
+
+from sklearn.metrics import mean_squared_error
+print(mean_squared_error(patients_test_target, linear_regression.predict(patients_test_data)))
+
+from sklearn.metrics import  r2_score
+print(r2_score(patients_test_target,linear_regression.predict(patients_test_data)))
+
+from sklearn.model_selection import cross_val_score
+scores = cross_val_score(LinearRegression(), patients['data'], patients['target'], cv = 4)
+print(scores)
