@@ -9,7 +9,7 @@ print(patients.target.shape)
 
 from sklearn.model_selection import train_test_split
 
-from sklearn.preprocessing import StandardScaler
+#from sklearn.preprocessing import StandardScaler
 #scaler = StandardScaler
 #sclaed_data = scaler.fit_transform(patients['data'])
 #sclaed_target = scaler.fit_transform(patients['target'])
